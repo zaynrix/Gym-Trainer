@@ -16,6 +16,7 @@ import 'package:gym_app/utils/resources/colors_manger.dart';
 import 'package:gym_app/utils/resources/theamManeager.dart';
 import 'package:provider/provider.dart';
 
+//PR TEST INFO.PLIST
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
