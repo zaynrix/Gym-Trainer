@@ -33,7 +33,6 @@ void main() async {
   OneSignalService().oneSignalSService();
   AwesomeNotifications().initialize(
     null,
-    // 'resource://drawable/res_notification_app_icon',
     [
       NotificationChannel(
         channelKey: 'basic_channel2',
