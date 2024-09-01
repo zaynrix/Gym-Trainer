@@ -23,6 +23,7 @@ class AppConfig {
       if (isAuthenticated) {
         nav.goToAndRemove(screenName: ScreenName.BNBUser);
       } else {
+        /// TODO : Edit this line to original
         nav.goToAndRemove(screenName: ScreenName.loginScreen);
       }
     } else {

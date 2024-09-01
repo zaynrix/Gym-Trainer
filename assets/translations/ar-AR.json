@@ -1,5 +1,5 @@
 {
-  "TECHNO GYM": "جيم تكنو",
+  "TechValley GYM": "جيم تك فالي",
   "SIGNUP": "التسجيل",
   "Phone": "رقم الهاتف",
   "Hello there, sign in to\ncontinue!": "مرحبًا، قم بتسجيل الدخول للمتابعة!",
@@ -40,9 +40,17 @@
   "Search": "بحث",
   "Popular Item": "عنصر مشهور",
   "See All": "عرض الكل",
-  "First ..": "الأول ..",
-  "Second ..": "الثاني ..",
-  "Third ..": "الثالث ..",
+  "headerToOnBoarding1": "الأول ..",
+  "headerToOnBoarding2": "الثاني ..",
+  "headerToOnBoarding3": "الثالث ..",
+  "onBoarding1": "تابع تمارينك وتقدّمك بسهولة.",
+  "onBoarding2": "خصص رحلتك الرياضية بالطريقة التي تناسبك.",
+  "onBoarding3": "ابقَ متحمسًا مع أهداف ونصائح مخصصة.",
+  "headerToOnBoarding": [
+    "الأول ..",
+    "الثاني ..",
+    "الثالث .."
+  ],
   "Today's Workout": "تمرين اليوم",
   "Daily Attendance": "الحضور اليومي",
   "My Workouts": "تماريني",
@@ -150,6 +158,14 @@
 "Articles \uD83D\uDCD6": "المقالات \uD83D\uDCD6",
   "English": "الانجليزية",
   "Arabic": "العربية",
-  "comingSoon":"قريباً"
+  "comingSoon":"قريباً",
+  "bodyToOnBoarding": [
+    "Track your workouts and progress with ease.",
+    "Customize your fitness journey, your way.",
+    "Stay motivated with personalized goals and tips."
+  ]
+
+
+
 
 }

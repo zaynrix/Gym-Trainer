@@ -15,6 +15,7 @@ class CustomButtonWidget extends StatelessWidget {
     this.style,
     this.icon,
     this.loadingColor = Colors.white,
+    this.isDisabled = false, // Default value is false
   });
 
   final void Function() onPressed;
@@ -27,13 +28,16 @@ class CustomButtonWidget extends StatelessWidget {
   final FontWeight? fontWeight;
   final ButtonStyle? style;
   final String? icon;
+  final bool isDisabled; // New parameter
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: style,
-      onPressed: isLoading ? () {} : onPressed,
-      child: isLoading == true
+      onPressed: isLoading || isDisabled
+          ? null
+          : onPressed, // Disable button if isLoading or isDisabled is true
+      child: isLoading
           ? Center(
               child: SizedBox(
                 height: 20,
@@ -46,18 +50,20 @@ class CustomButtonWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
-                      CustomSvgAssets(
-                        path: icon,
-                      ),
-                      Spacer(),
+                      if (icon != null) // Ensure icon is not null
+                        CustomSvgAssets(
+                          path: icon!,
+                        ),
+                      const Spacer(),
                       Text(
                         title,
                         style: TextStyle(
-                            fontSize: fontSize,
-                            color: textColor,
-                            fontWeight: fontWeight),
+                          fontSize: fontSize,
+                          color: textColor,
+                          fontWeight: fontWeight,
+                        ),
                       ),
-                      Spacer()
+                      const Spacer()
                     ],
                   ),
                 )

@@ -31,8 +31,11 @@ class SearchResultWidget extends StatelessWidget {
                     const CircularProgressIndicator()); // Loading indicator while data is fetched
           }
           if (!snapshot.hasData || snapshot.data?.docs.isEmpty == true) {
-            return Center(
-              child: Text('${noItems.tr()}( ${value.searchData} )'),
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: Center(
+                child: Text('${noItems.tr()}( ${value.searchData} )'),
+              ),
             ); // Display a message if no data is available
           }
 

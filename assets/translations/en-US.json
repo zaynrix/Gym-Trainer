@@ -1,5 +1,5 @@
 {
-    "TECHNO GYM": "TECHNO GYM",
+    "TechValley GYM": "TechValley GYM",
     "SIGNUP": "SIGNUP",
     "Phone": "Phone",
     "Hello there, sign in to\ncontinue!": "Hello there, sign in to\ncontinue!",
@@ -33,16 +33,13 @@
     "We have sent a password recovery instructions to your email.": "We have sent a password recovery instructions to your email.",
     "Open email": "Open email",
     "I'll confirm later": "I'll confirm later",
-    "Create new password": "Create new password",
+    "Create new passwo\"headerToOnBoarding\": [\n    \"الأول ..\",\n    \"الثاني ..\",\n    \"الثالث ..\"\n  ],rd": "Create new password",
     "Your new password must be different from previously used passwords.": "Your new password must be different from previously used passwords.",
     "Confirm": "Confirm",
     "Home": "Home",
     "Search": "Search",
     "Popular Item": "Popular Item",
     "See All": "See All",
-    "First ..": "First ..",
-    "Second ..": "Second ..",
-    "Third ..": "Third ..",
     "Today's Workout": "Today's Workout",
     "Daily Attendance": "Daily Attendance",
     "My Workouts": "My Workouts",
@@ -55,6 +52,12 @@
     "Discover New Workouts": "Discover New Workouts",
     "More Details!": "More Details!",
     "3 Months": "3 Months",
+    "headerToOnBoarding1": "First ..",
+    "headerToOnBoarding2": "Second ..",
+    "headerToOnBoarding3": "Third ..",
+    "onBoarding1": "Follow your workouts and progress easily.",
+    "onBoarding2": "Customize your fitness journey the way you like.",
+    "onBoarding3": "Stay motivated with personalized goals and tips.",
     "Active | Most Popular": "Active | Most Popular",
     "Let's do it!": "Let's do it!",
     "Attend Now!": "Attend Now!",
@@ -170,5 +173,16 @@
     "Description": "Description",
     "You must subscribe to paid subscriptions in order to access this feature and enjoy our distinguished services": "You must subscribe to paid subscriptions in order to access this feature and enjoy our distinguished services",
     "Articles":"Articles \uD83D\uDCD6",
-    "comingSoon":"Coming Soon"
+    "comingSoon":"Coming Soon",
+    "headerToOnBoarding": [
+        "First ..",
+        "Second ..",
+        "Third .."
+    ],
+    "bodyToOnBoarding": [
+        "تابع تمارينك وتقدّمك بسهولة.",
+        "خصص رحلتك الرياضية بالطريقة التي تناسبك.",
+        "ابقَ متحمسًا مع أهداف ونصائح مخصصة."
+    ]
+
 }

@@ -207,7 +207,7 @@ const String comingSoon = 'Coming Soon';
 const String thisFeatureIsPlan = 'This feature is plan to next update';
 const String ch1 = 'Change Language!';
 // Change 'const' to 'const' for each string
-const String technoGym = "TECHNO GYM";
+const String technoGym = "TechValley GYM";
 const String signUp = "SIGNUP";
 const String email = "Email address";
 const String phone = "Phone";
@@ -395,12 +395,8 @@ const String termsConditions = "Terms&Conditions";
 // const String search = "Search".tr();
 // const String popularItem = "Popular Item".tr();
 // const String seeAll = "See All".tr();
-const dynamic headerToOnBoarding = ["First ..", 'Second ..', 'Third ..'];
-const dynamic bodyToOnBoarding = [
-  "Lorem Ipsum is simply dummy text of the printing and typesetting..",
-  'Lorem Ipsum is simply dummy text of the printing and typesetting..',
-  'Lorem Ipsum is simply dummy text of the printing and typesetting..'
-];
+const dynamic headerToOnBoarding = "headerToOnBoarding";
+const dynamic bodyToOnBoarding = "bodyToOnBoarding";
 // const String seaToday = "Today’s Workout".tr();
 // const String dailyAttendance = "Daily Attendance".tr();
 // const String myWorkouts = "My Workouts".tr();
