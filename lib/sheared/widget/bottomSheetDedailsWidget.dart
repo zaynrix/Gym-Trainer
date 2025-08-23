@@ -20,7 +20,8 @@ class BottomSheetDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingHorizontal),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSizes.paddingHorizontal), // Added const
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -32,7 +33,6 @@ class BottomSheetDetailsWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: const Color(0xFFAAABAE)),
           ),
-          // const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -56,14 +56,12 @@ class BottomSheetDetailsWidget extends StatelessWidget {
             path: AppIcons.subscribe,
             color: ColorManager.secondary400,
           ),
-          // Spacer(),
           24.addVerticalSpace,
           Text(
             "youMustSubscribeToPaid".tr(),
             textAlign: TextAlign.center,
             style: StyleManger.headline4(),
           ),
-          // Spacer(),
           32.addVerticalSpace,
           CustomButtonWidget(
             title: subscribeNow.tr(),

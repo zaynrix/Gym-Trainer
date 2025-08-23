@@ -10,18 +10,39 @@ import 'package:gym_app/utils/resources/font_size.dart';
 import 'package:gym_app/utils/resources/icons_constant.dart';
 import 'package:gym_app/utils/resources/sizes_in_app.dart';
 import 'package:gym_app/utils/resources/strings_in_app.dart';
-import 'package:open_mail_app/open_mail_app.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CheckEmailScreen extends StatelessWidget {
   const CheckEmailScreen({Key? key}) : super(key: key);
 
-  void showNoMailAppsDialog(BuildContext context) {
+  Future<void> _openEmailApp(BuildContext context) async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: '', // You can add a default email address here if needed
+    );
+
+    try {
+      if (await canLaunchUrl(emailUri)) {
+        await launchUrl(
+          emailUri,
+          mode: LaunchMode.externalApplication,
+        );
+      } else {
+        _showNoMailAppsDialog(context);
+      }
+    } catch (e) {
+      _showNoMailAppsDialog(context);
+    }
+  }
+
+  void _showNoMailAppsDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: const Text("Open Mail App"),
-          content: const Text("No mail apps installed"),
+          content:
+              const Text("No mail apps available or unable to open mail app"),
           actions: <Widget>[
             TextButton(
               child: const Text("OK"),
@@ -80,25 +101,7 @@ class CheckEmailScreen extends StatelessWidget {
             const SizedBox(height: 24),
             CustomButtonWidget(
               title: openEmail.tr(),
-              onPressed: () async {
-                OpenMailApp.getMailApps();
-                var result = await OpenMailApp.openMailApp(
-                  nativePickerTitle: 'Select email app to open',
-                );
-                if (!result.didOpen && !result.canOpen) {
-                  showNoMailAppsDialog(context);
-                } else if (!result.didOpen && result.canOpen) {
-                  showDialog(
-                    context: context,
-                    builder: (_) {
-                      return MailAppPickerDialog(
-                        mailApps: result.options,
-                      );
-                    },
-                  );
-                }
-                // AppRouter.goTo(screenName: ScreenName.createNewPasswordScreen);
-              },
+              onPressed: () => _openEmailApp(context),
             ),
             const SizedBox(height: 16),
             CustomButtonWidget(

@@ -26,7 +26,9 @@ extension StringCasingExtension on String {
 
   String? differenceDay() {
     DateTime dateFormat = DateTime.parse(this);
-    final date = Jiffy(DateTime.now()).diff(dateFormat, Units.DAY).toString();
+    final date = Jiffy.parseFromDateTime(DateTime.now())
+        .diff(Jiffy.parseFromDateTime(dateFormat), unit: Unit.day)
+        .toString();
     if (date == "0") {
       return "Today";
     }
@@ -38,7 +40,9 @@ extension StringCasingExtension on String {
 
   String? differenceHour() {
     DateTime dateFormat = DateTime.parse(this);
-    final hours = Jiffy(DateTime.now()).diff(dateFormat, Units.HOUR).toString();
+    final hours = Jiffy.parseFromDateTime(DateTime.now())
+        .diff(Jiffy.parseFromDateTime(dateFormat), unit: Unit.hour)
+        .toString();
     return "$hours Hours ago";
   }
 

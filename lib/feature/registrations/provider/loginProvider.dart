@@ -93,11 +93,12 @@ class LoginProvider extends ChangeNotifier {
   Future<void> signInWithGoogle() async {
     try {
       setLoadingGoogle(true);
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAccount? googleUser =
+          await GoogleSignIn.instance.authenticate();
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
+        accessToken: googleAuth?.idToken,
         idToken: googleAuth?.idToken,
       );
       final credentialSign =

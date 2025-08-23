@@ -10,14 +10,14 @@ import 'package:gym_app/utils/resources/style_manger.dart';
 class CategoryListWidget extends StatelessWidget {
   final List<CategoryModel> categoryList;
 
-  CategoryListWidget({required this.categoryList});
+  const CategoryListWidget({Key? key, required this.categoryList}) : super(key: key); // Added const and key
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      separatorBuilder: (context, index) => SizedBox(
+      separatorBuilder: (context, index) => const SizedBox(
         width: 13,
-      ),
+      ), // Added const
       itemCount: categoryList.length,
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
@@ -31,7 +31,7 @@ class CategoryListWidget extends StatelessWidget {
           },
           child: Column(
             children: [
-              Container(
+              SizedBox( // Changed Container to SizedBox for better performance
                 width: 61,
                 height: 61,
                 child: ClipOval(
@@ -40,8 +40,8 @@ class CategoryListWidget extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: categoryData.image,
                       placeholder: (context, url) =>
-                          CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      const CircularProgressIndicator(), // Added const
+                      errorWidget: (context, url, error) => const Icon(Icons.error), // Added const
                       fit: BoxFit.cover,
                     ),
                   ),

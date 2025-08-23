@@ -26,30 +26,29 @@ class SearchResultWidget extends StatelessWidget {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-                child:
-                    const CircularProgressIndicator()); // Loading indicator while data is fetched
+            return const Center(
+                child: CircularProgressIndicator()); // Fixed const
           }
           if (!snapshot.hasData || snapshot.data?.docs.isEmpty == true) {
-            return Container(
+            return SizedBox(
               height: MediaQuery.of(context).size.height * 0.3,
               child: Center(
                 child: Text('${noItems.tr()}( ${value.searchData} )'),
               ),
-            ); // Display a message if no data is available
+            ); // Fixed Container to SizedBox
           }
 
           final docs = snapshot.data!.docs;
 
           return value.searchData.trim().isEmpty || value.searchData.isEmpty
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink() // Added const
               : Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 13.w, vertical: 13.h),
                   child: ListView.separated(
-                    separatorBuilder: (context, index) => Divider(
+                    separatorBuilder: (context, index) => const Divider(
                       color: Colors.transparent,
-                    ),
+                    ), // Added const
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: snapshot.data!.docs.length,
@@ -58,7 +57,9 @@ class SearchResultWidget extends StatelessWidget {
                       final exercise = ExerciseModel.fromDocumentSnapshot(doc);
 
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          // Add navigation logic here if needed
+                        },
                         child: HorizontalExerciseWidget(
                           exerciseModel: exercise,
                         ),
@@ -70,8 +71,4 @@ class SearchResultWidget extends StatelessWidget {
       ),
     );
   }
-
-// Widget buildSearchResults(ProfileController value) {
-//   return
-//   // Build search results UI
 }

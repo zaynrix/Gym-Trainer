@@ -20,30 +20,30 @@ class HorizontalExerciseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       padding: EdgeInsets.zero,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(), // Added const
       shrinkWrap: true,
       itemCount: resultList.length,
       separatorBuilder: (context, index) => Column(
         children: [
           10.addVerticalSpace,
-          Divider(),
+          const Divider(), // Added const
           10.addVerticalSpace,
         ],
       ),
       itemBuilder: (context, index) {
         bool? isLock = resultList[index].isLocked;
         return GestureDetector(
-          onTap: (){
+          onTap: () {
             if (isLock == true) {
               showModalBottomSheet(
                   useSafeArea: true,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
                   context: context,
-                  builder: (context) => BottomSheetDetailsWidget());
+                  builder: (context) =>
+                      const BottomSheetDetailsWidget()); // Added const
             } else {
-              sl<HomeProvider>()
-                  .getCategoryName(resultList[index].categoryId);
+              sl<HomeProvider>().getCategoryName(resultList[index].categoryId!);
               sl<AppRouter>().goTo(
                   screenName: ScreenName.exercisesDetailsScreen,
                   object: resultList[index]);

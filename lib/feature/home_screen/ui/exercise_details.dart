@@ -205,7 +205,7 @@ class ExerciseDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "3 ${weeks.tr()} - ${value.ExerciseDetailsList!.length} ${exercise.tr()}",
+                          "3 ${weeks.tr()} - ${value.exerciseDetailsList!.length} ${exercise.tr()}",
                           style: TextStyle(
                               color: ColorManager.textBlack,
                               fontWeight: FontWeight.w600,

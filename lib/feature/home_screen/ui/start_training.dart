@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gym_app/feature/home_screen/models/exercise_model.dart';
 import 'package:gym_app/feature/home_screen/providers/home_provider.dart';
-import 'package:gym_app/feature/home_screen/ui/widgets/countdown.dart';
 import 'package:gym_app/feature/home_screen/ui/widgets/horizontal_exercise_list_countdown.dart';
 import 'package:gym_app/routes/app_router.dart';
 import 'package:gym_app/service_locator.dart';
@@ -25,31 +24,40 @@ class StartTraining extends StatefulWidget {
 
   @override
   State<StartTraining> createState() => _StartTrainingState();
-} //
+}
 
 class _StartTrainingState extends State<StartTraining> {
+  int getDurationInSeconds(String? timeString) {
+    try {
+      return int.parse(timeString ?? "1") * 60;
+    } catch (e) {
+      return 60; // default 1 minute
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.scaffoldColor,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-          leading: GestureDetector(
-        onTap: () {
-          sl<AppRouter>().back(true);
-        },
-        child: MainContainer(
-          left: 6,
-          right: 6,
-          top: 25,
-          bottom: 25,
-          color: Colors.grey.shade300,
-          alignment: Alignment.center,
-          child: CustomSvgAssets(
-            path: AppIcons.back,
+        leading: GestureDetector(
+          onTap: () {
+            sl<AppRouter>().back(true);
+          },
+          child: MainContainer(
+            left: 6,
+            right: 6,
+            top: 25,
+            bottom: 25,
+            color: Colors.grey.shade300,
+            alignment: Alignment.center,
+            child: CustomSvgAssets(
+              path: AppIcons.back,
+            ),
           ),
         ),
-      )),
+      ),
       body: SingleChildScrollView(
         child: Consumer<HomeProvider>(
           builder: (context, value, child) {
@@ -57,11 +65,27 @@ class _StartTrainingState extends State<StartTraining> {
             final exerciseResult = value.exerciseResult;
             final upNextList = value.upNextList;
 
+            // Add null safety check
+            if (exerciseResult == null || exerciseResult.isEmpty) {
+              return Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 200.h),
+                  child: Text(
+                    "No exercises available",
+                    style: StyleManger.headLineBar(),
+                  ),
+                ),
+              );
+            }
+
+            final currentExercise = exerciseResult[currentIndex];
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Hero(
-                  tag: exerciseResult![currentIndex],
+                  tag:
+                      "exercise_${currentIndex}_${currentExercise.id ?? currentIndex}",
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(15),
@@ -71,13 +95,18 @@ class _StartTrainingState extends State<StartTraining> {
                       fit: BoxFit.cover,
                       height: 419.h,
                       width: double.infinity,
-                      imageUrl: exerciseResult[currentIndex].image!,
+                      imageUrl: currentExercise.image ?? "",
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) => Center(
                         child: CircularProgressIndicator(
-                            value: downloadProgress.progress),
+                          value: downloadProgress.progress,
+                        ),
                       ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      errorWidget: (context, url, error) => Container(
+                        height: 419.h,
+                        color: Colors.grey.shade300,
+                        child: Icon(Icons.error, size: 50),
+                      ),
                     ),
                   ),
                 ),
@@ -97,7 +126,7 @@ class _StartTrainingState extends State<StartTraining> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    exerciseResult[currentIndex].title!,
+                    currentExercise.title ?? "Exercise",
                     style: StyleManger.headLineBar(),
                   ),
                 ),
@@ -105,13 +134,10 @@ class _StartTrainingState extends State<StartTraining> {
                 Center(
                   child: CircularCountDownTimer(
                     controller: value.countDownController,
-                    duration:
-                        int.parse(exerciseResult[currentIndex].time!) * 60,
+                    duration: getDurationInSeconds(currentExercise.time),
                     isReverse: true,
                     height: 100,
                     width: 100,
-                    // initialDuration:
-                    //     int.parse(exerciseResult[currentIndex].time!) * 60,
                     strokeWidth: 10,
                     fillColor: ColorManager.black,
                     onComplete: () {
@@ -120,7 +146,7 @@ class _StartTrainingState extends State<StartTraining> {
                           content: Text('Finished'),
                           behavior: SnackBarBehavior.floating,
                           duration: const Duration(seconds: 2),
-                          backgroundColor: kblueColor,
+                          backgroundColor: ColorManager.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -140,7 +166,7 @@ class _StartTrainingState extends State<StartTraining> {
                 21.addVerticalSpace,
                 Center(
                   child: Text(
-                    "${int.parse(exerciseResult[currentIndex].time!)} min",
+                    "${getDurationInSeconds(currentExercise.time) ~/ 60} min",
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
                 ),
@@ -155,16 +181,16 @@ class _StartTrainingState extends State<StartTraining> {
                       ),
                       child: TextButton.icon(
                         onPressed: () {
-                          value.platStop();
+                          value.playStop();
                         },
                         icon: Icon(
-                          value.countDownController.isPaused
+                          value.countDownController.isPaused == true
                               ? Icons.play_arrow
                               : Icons.pause,
                           color: Colors.black,
                         ),
                         label: Text(
-                          value.countDownController.isPaused
+                          value.countDownController.isPaused == true
                               ? "${resume.tr()}"
                               : "${pause.tr()}",
                           style: TextStyle(color: Colors.black),
@@ -199,7 +225,7 @@ class _StartTrainingState extends State<StartTraining> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "${upNext.tr()} ${upNextList?.length}",
+                    "${upNext.tr()} ${upNextList?.length ?? 0}",
                     style: TextStyle(
                       color: ColorManager.black,
                       fontSize: 14.sp,

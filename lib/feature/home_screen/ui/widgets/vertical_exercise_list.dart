@@ -19,9 +19,9 @@ class VerticalExerciseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
         itemCount: resultList.length,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(), // Added const
         shrinkWrap: true,
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => const Divider(), // Added const
         itemBuilder: (context, index) {
           bool? isLock = resultList[index].isLocked;
           return GestureDetector(
@@ -32,10 +32,11 @@ class VerticalExerciseList extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     context: context,
-                    builder: (context) => BottomSheetDetailsWidget());
+                    builder: (context) =>
+                        const BottomSheetDetailsWidget()); // Added const
               } else {
                 sl<HomeProvider>()
-                    .getCategoryName(resultList[index].categoryId);
+                    .getCategoryName(resultList[index].categoryId!);
                 sl<AppRouter>().goTo(
                     screenName: ScreenName.exercisesDetailsScreen,
                     object: resultList[index]);
@@ -43,7 +44,6 @@ class VerticalExerciseList extends StatelessWidget {
             },
             child: VerticalExerciseWidget(
               exerciseModel: resultList[index],
-              // exerciseModel:
             ),
           );
         });

@@ -30,7 +30,10 @@ void main() async {
     print('Firebase initialization error: $e');
   }
   await init();
-  OneSignalService().oneSignalSService();
+
+  // Fixed method call
+  OneSignalService().oneSignalService();
+
   AwesomeNotifications().initialize(
     null,
     [

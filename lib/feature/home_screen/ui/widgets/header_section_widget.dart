@@ -8,6 +8,7 @@ class HeaderSectionWidget extends StatelessWidget {
   final String? title;
   final String? trailing;
   final void Function()? onTap;
+
   const HeaderSectionWidget({Key? key, this.title, this.trailing, this.onTap})
       : super(key: key);
 
@@ -17,8 +18,9 @@ class HeaderSectionWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          title!.tr(),
-          style: TextStyle(
+          title?.tr() ?? '', // Added null safety
+          style: const TextStyle(
+              // Added const
               color: ColorManager.black,
               fontSize: 18,
               fontWeight: FontWeight.w400),
@@ -26,7 +28,7 @@ class HeaderSectionWidget extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Text(
-            trailing!.tr(),
+            trailing?.tr() ?? '', // Added null safety
             style: TextStyle(
                 color: ColorManager.black,
                 fontSize: FontSize.s12.sp,
